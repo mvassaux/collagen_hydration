@@ -1,0 +1,59 @@
+# Forcefield/Topology Information
+paraTypeCharmm   off
+amber yes
+parmfile ./3hr2_clean_amber_mutations_modifications_missing_charged_minim_pbc_solvated_equilibrated_hydrated.prmtop
+coordinates ./3hr2_clean_amber_mutations_modifications_missing_charged_minim_pbc_solvated_equilibrated_hydrated.pdb
+bincoordinates ./min0.coor
+readexclusions no
+#seed 11111
+# Unchanging information
+################################################################################
+# Force-Field Parameters
+exclude       scaled1-4
+1-4scaling     0.833333
+cutoff       8.
+switching      on
+switchdist     6.
+pairlistdist    9.5
+# Integrator Parameters
+timestep      2.0 ;# 2fs/step
+rigidBonds     all ;# needed for 2fs steps
+rigidtolerance   0.00001
+rigidIterations   100
+nonbondedFreq    1
+fullElectFrequency 2
+stepspercycle    10
+wrapWater      on
+wrapAll       on
+# Output
+outputEnergies   500
+outputPressure   500
+# Protocol specific information
+################################################################################
+#cellBasisVector1    39.970 0.000 0.000
+#cellBasisVector2    -7.238 25.960 0.000
+#cellBasisVector3    -54.249 -5.791 675.701
+#cellOrigin        0.000 0.000 0.000
+extendedSystem ./min0.xsc
+PME         yes
+PMEGridSpacing   1.0
+
+# Temperature
+temperature         50
+reassignFreq        100
+reassignIncr        1.0
+reassignHold        298.0
+
+# Constraining CA atoms position with respect to 3HR2 PDB data
+fixedAtoms yes
+fixedAtomsForces yes
+fixedAtomsFile ./3hr2_clean_amber_mutations_modifications_missing_charged_minim_pbc_solvated_equilibrated_hydrated_fixedCA.pdb
+fixedAtomsCol B
+
+# Output and restart
+binaryoutput    yes
+outputname     ./eq1
+DCDfile ./eq1.dcd
+DCDfreq 50000
+DCDUnitCell yes
+run 250000
